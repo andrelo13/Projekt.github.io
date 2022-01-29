@@ -1,0 +1,122 @@
+html {
+	margin: 0; padding: 0;
+	font-family: "calibri";
+	font-size: 14pt;
+}
+body {
+	padding: 0 20px;
+	margin: 0;
+}
+* {
+	box-sizing: border-box;
+}
+.naglowek, .strona {
+	width: 100%;
+	max-width: 1280px;
+	margin: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.naglowek {
+	border: 10px solid #444;
+	border-bottom-color: #3193FF;
+	border-bottom-width: 60px;
+	padding: 20px;
+	background-color: #555;
+	color: #FFF;
+	font-weight: bold;
+}
+.naglowek nav {
+	text-align: right;
+	margin-bottom: -60px;
+}
+.naglowek .line {
+	width: 100%;
+	height: 2px;
+	background-color: rgb(24, 40, 131);
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+.naglowek nav a {
+	color: #FFFFFF;
+	text-decoration: none;
+	margin-left: 20px;
+}
+.naglowek nav a:hover {
+	color: #ffd931;
+}
+h1 {
+	color: #3193FF;
+}
+h2 {
+	color: #3193FF;
+}
+code {
+	display: inline-block;
+	width: 100%;
+	height: auto;
+	padding: 5px;
+	border: 1px solid #444;
+	background: rgb(37,141,200);
+	background: -moz-linear-gradient(top,  rgba(37,141,200,1) 0%, rgba(37,141,200,1) 100%);
+	background: -webkit-linear-gradient(top,  rgba(37,141,200,1) 0%,rgba(37,141,200,1) 100%);
+	background: linear-gradient(to bottom,  rgba(37,141,200,1) 0%,rgba(37,141,200,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', endColorstr='#258dc8',GradientType=0 );
+	margin: 10px;
+	white-space: pre-wrap
+}
+code .comment {
+	color: rgb(32, 229, 255);
+}
+img.photo {
+	width: 100%;
+	max-width: 256px;
+	float: left;
+	margin: 20px;
+}
+
+@media screen and (max-width: 580px) {
+	img.photo {
+		float: none;
+		display: block;
+		margin: auto;
+
+	}
+}
+@media screen and (max-width: 640px) {
+	nav {
+		text-align: center !important;
+	}
+	nav a {
+		margin: 10px !important;
+	}
+}
+@media screen and (max-width: 480px) {
+	body {
+		padding: 5px;
+	}
+	.naglowek {
+		margin-top: 0;
+	}
+}
+@media screen and (max-width: 400px) {
+	.strona {
+		padding: 5px;
+	}
+	html {
+		font-size: 12pt !important;
+	}
+	body {
+		padding: 0;
+	}
+	.naglowek {
+		border: none;
+		padding: 10px !important;
+	}
+	.naglowek nav {
+		margin-bottom: auto;
+	}
+	.naglowek .line {
+		background-color: #3193FF;
+	}
+}

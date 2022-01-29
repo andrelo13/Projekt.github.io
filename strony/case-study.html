@@ -1,0 +1,85 @@
+<H1>Przykłady wykorzystania</H1>
+
+Na samym początku dołączyłem potrzebną bibliotekę  pod aliasem “_”, ponieważ jest ona pod takim samym aliasem wykorzystywana na frontend-zie, a po co sobie utrudniać, nazwijmy ją tak samo :). Dodałem sobie również fake-ową listę użytkowników.
+
+<CODE>var _ = require('lodash');
+
+var usersList = [
+	{
+		id: 1,
+		display_name: 'Bartosz',
+		email: 'bartosz.z@live.com',
+		roles: ['admin', 'editor', 'user']
+	},
+	{
+		id: 2,
+		display_name: 'Art',
+		email: 'bartosz.z@gamil.com',
+		roles: ['admin', 'user']
+	},
+	{
+		id: 3,
+		display_name: 'Telimena',
+		email: 'tali@onet.pl',
+		roles: ['admin', 'editor']
+	},
+	{
+		id: 4,
+		display_name: 'Tomasz',
+		email: 'thomas.ger@gmail.com',
+		roles: ['user']
+	},
+	{
+		id: 5,
+		display_name: 'Kacper',
+		email: 'kacper.tolejko@doz.com',
+		roles: ['user']
+	}
+];
+</CODE>
+
+<H2>findIndex</H2>
+
+Metodę findIndex warto wykorzystać kiedy chcemy znaleźć pozycje pod jaką znajduje się dany element i ten element chcemy np. wyświetlić, zmodyfikować, przekazać dalej itp.
+
+<CODE>var userIndex = _.findIndex(usersList,
+
+function(user) {
+	return user.email === 'kacper.tolejko@doz.com';
+});
+
+console.log('User:', usersList[userIndex]);
+</CODE>
+
+<H2>map</H2>
+
+Metoda map jest bardzo przydatna, kiedy chcemy zmodyfikować strukturę obiektów znajdujących się na liście, jak np. dodanie pola isAdmin i np. usunięcie ról, aby nie były przesyłane dalej.
+
+<CODE>function addIsAdmn(user) {
+	if (user.roles.indexOf('admin') !== -1) {
+		user.isAdmin = true;
+	}
+
+	return user;
+}
+
+_.map(usersList, addIsAdmn);
+
+console.log('Users:', usersList);
+</CODE>
+
+<H2>last</H2>
+
+Last należy do metod, które są łatwe do stworzenia, ale, ponownie, po co pisać jeśli już jest. Zwłaszcza, że metoda ta pozwala stworzyć bardziej czytelny kod, bez dodatkowego nakładu pracy.
+
+<CODE>var lastUser = _.last(usersList);
+console.log('lastUser:', lastUser);
+</CODE>
+
+<H2>sortBy</H2>
+
+I oto kolejna metoda, która bardzo ułatwia pisanie kodu porządkującego nasze struktury. Tutaj mamy dowolność, albo dodać funkcję, która będzie posiadać logikę porządkującą, albo dodać pola po których chcemy wszystko uporządkować.
+
+<CODE>var sortedUser = _.sortBy(usersList, ['display_name', 'email']);
+console.log('sortedUser:', sortedUser);
+</CODE>

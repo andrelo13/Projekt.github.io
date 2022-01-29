@@ -1,0 +1,127 @@
+<H1>get</H1>
+
+To bardzo przydatna funkcja, gdy chcemy się dostać do jakiejś zagnieżdżonej własności obiektu, a nie chce nam się na każdym poziomie sprawdzać, czy obiekt nie jest null (lub ogólnie konwersja obiektu do boolean daje wynik false).
+
+<CODE>var fragmentSamochodu = { 'koło': [{ 'opona': { 'średnica': 3 } }] };
+_.get(fragmentSamochodu, 'koło.opona.średnica', 5);
+</CODE>
+
+W takiej sytuacji nie musimy się zastanawiać, czy samochód ma koło, a koło z kolei czy ma oponę, a na końcu czy ma zdefiniowaną średnicę. Gdy któregoś elementu po drodze nie ma, wówczas otrzymamy domyślną wartość 5.
+
+<H1>range</H1>
+
+Przydatna, gdy chcemy wygenerować tablicę liczb o zadanym zakresie.
+
+<CODE>_.range(4);
+<SPAN CLASS="comment">// => [0, 1, 2, 3]</SPAN>
+ 
+_.range(-4);
+<SPAN CLASS="comment">// => [0, -1, -2, -3]</SPAN>
+ 
+_.range(1, 5);
+<SPAN CLASS="comment">// => [1, 2, 3, 4]</SPAN>
+ 
+_.range(0, 20, 5);
+<SPAN CLASS="comment">// => [0, 5, 10, 15]</SPAN>
+ 
+_.range(0, -4, -1);
+<SPAN CLASS="comment">// => [0, -1, -2, -3]</SPAN>
+ 
+_.range(1, 4, 0);
+<SPAN CLASS="comment">// => [1, 1, 1]</SPAN>
+ 
+_.range(0);
+<SPAN CLASS="comment">// => []</SPAN>
+</CODE>
+
+<H1>clone</H1>
+
+Wykonuje płytkie klonowanie obiektu.
+
+<CODE>var objects = [{ 'a': 1 }, { 'b': 2 }];
+ 
+var shallow = _.clone(objects);
+console.log(shallow[0] === objects[0]);
+</CODE>
+
+Wynik w konsoli debuggerskiej to:
+
+<CODE>true
+</CODE>
+
+<I>Jest jeszcze wersja z klonowaniem głębokim <B>cloneDeep</B>.</I>
+
+<H1>assign</H1>
+
+Do jednego obiektu dopisywane są właściwości z drugiego obiektu. Jeśli w docelowym obiekcie są już jakieś właściwości, które występują w obiekcie źródłowym, wówczas zostaną one nadpisane.
+
+<CODE>function Foo() {
+  this.a = 1;
+}
+ 
+function Bar() {
+  this.c = 3;
+}
+ 
+Foo.prototype.b = 2;
+Bar.prototype.d = 4;
+
+_.assign({ 'a': 0 }, new Foo, new Bar);
+</CODE>
+
+Wynik to:
+
+<CODE>{ 'a': 1, 'c': 3 }
+</CODE>
+
+<H1>flatten</H1>
+
+Spłaszcza tablicę tablic, ale tylko do jednego poziomu.
+
+<CODE>_.flatten(['Ala', ['ma'], 'kota']);
+</CODE>
+
+Wynik to:
+
+<CODE>['Ala', 'ma', 'kota']
+</CODE>
+
+<I>Jest jeszcze wersja <B>flattenDeep</B>, która robi to rekurencyjnie do końca.</I>
+
+<H1>fromPairs</H1>
+
+Doskonała funkcja do konwersji tablicy tablic na obiekt. Na wejściu podajemy tablicę, której elementami są tablice dwuelementowe, z której pierwszy element to klucz tworzonego obiektu, a drugi to wartość tego klucza.
+
+<CODE>_.fromPairs([['długość', 5], ['szerokość', 2.5]]);
+</CODE>
+
+Wynik to:
+
+<CODE>{długość: 5, szerokość: 2.5}
+</CODE>
+
+<I>Istnieje też funkcja odwrotna: <B>toPairs</B>.</I>
+
+<H1>sortBy</H1>
+
+Od tej pory sortowanie nie może być prostsze. Jako argument, poza oczywiście tablicą, podajemy sposób sortowania, który może być zdefiniowany jako
+
+<UL TYPE="square">
+	<LI>funkcja zwracająca prymitywną wartość, po której można już łatwo posortować, albo</LI>
+	<LI>tablicę nazw właściwości, po których należy sortować.</LI>
+</UL>
+
+Oczywiście użycie tej funkcji ma sens wówczas, gdy chcemy posortować tablicę obiektów. Wtedy największą zwięzłość osiąga się tym drugi sposobem. Np. gdy chcemy posortować koła po promieniu opony, to napiszemy:
+
+<CODE>_.sortBy(tablicaKol, ['opona.srednica']);
+</CODE>
+
+<H1>groupBy</H1>
+
+Kolejna funkcja, która uprości kod. Wywołanie podobne jak w przypadku sortBy z tą różnicą, że teraz wskazujemy metodę grupowania. Jako wynik dostaniemy obiekt z kluczami reprezentującymi wyznaczone grupy, a wartości tych kluczy będą tablicami obiektów przyporządkowanych do danej grupy.<BR /><BR />
+
+Tak jak wspomniałem na początku, jest też garść funkcji, które są obecnie dostępne "za darmo" w czystym JS, operujących na tablicach. Są to między innymi: each, map, filter, reduce. Wersje lodash-owe mają jednak tę zaletę, że działają również na "null-owych" kolekcjach. Np. wywołanie
+
+<CODE>_.filter(null, e => true)</CODE>
+
+da nam w wyniku pustą tablicę.
